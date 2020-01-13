@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Custom CSS + CDN styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/CSS/styles.css" />
+    <title>Simple Weather</title>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark justify-content-end">
+        <span class="navbar-brand mb-0 h1">Weather Dashborad API</span>
+    </nav>
+    <div class="container main">
+        <div class="row">
+            <div class="col-4">
+                <!-- search area -->
+                <div class="row">
+                    <h3>Search for a city:</h3>
+                    <div class="col-12">
+                        <div class="input-group">
+                            <select class="custom-select" id="inputGroupSelect04"
+                                aria-label="Example select with button addon">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" id="searchBTN" type="button">Button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- city list group -->
+                <div class="row">
+                    <h3>Select a popular city:</h3>
+                    <div class="col-12">
+                        <ul class="list-group">
+                            <li class="list-group-item active" type="button" value="Boston">Boston</li>
+                            <li class="list-group-item" type="button" value="Washington%20DC">Washington DC</li>
+                            <li class="list-group-item" type="button" value="New%20York">New York</li>
+                            <li class="list-group-item" type="button" value="Tampa">Tampa</li>
+                            <li class="list-group-item" type="button" value="New%20Orleans">New Orleans</li>
+                            <li class="list-group-item" type="button" valuye="Oaklahoma">Oaklahoma City</li>
+                            <li class="list-group-item" type="button" value="Las%20Vegas">Las Vegas</li>
+                            <li class="list-group-item" type="button" value="Seatle">Seatle</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Current forcast -->
+                        <div class="jumbotron">
+                            <div class="jumbotron jumbotron-fluid">
+                                <div class="container">
+                                    <h1 class="display-4">City and Date</h1>
+                                    <hr class="my-4">
+                                    <p>Temperature:</p><span id="currentTemp"></span>
+                                    <p>Humidity:</p><span id="currentHumidity"></span>
+                                    <p>Wind Speed:</p><span id="currentWindSpeed"></span>
+                                    <p>UV Index:</p><span id="CurrentUV"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- 5 day forcast cards -->
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- CDN js libraries + custom scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js> </script> <script
+        src="assets/JavaScript/script.js"></script>
+</body>
+
+</html>
