@@ -12,8 +12,11 @@ $(document).ready(function () {
     var humidity = "-";
     var wind_speed = "-";
     var uv_index = "-";
+    var latitude = "";
+    var longitude = "";
 
     // 5-DAY CARDs
+    var car_dispaly = $("#card-display");
 
     // API global vals
     var key = "b452ea12ae8781f3b7e10bd1f1ed3249";
@@ -37,9 +40,8 @@ $(document).ready(function () {
     //main function handling page functionality
     function main(){
         renderPopCities();
-        renderJumbo();
-        renderCards();
-        
+        //inital render at defualt "-" ticks
+        renderJumbo()
     }
     //Dynamic creation of group items of popular cities
     //obtains list group and appends jquery list items with bootstrap attributes. Based on popCities array
@@ -59,12 +61,44 @@ $(document).ready(function () {
             // pass user click to query to re-render card states
             city.on("click", function () {
                 $(this).attr("class", "list-group-item active");
-                setPopCities();
+                renderPopCities();
                 query = $(this).attr("value");
                 requestAPI();
             });
             popCitiesLG.append(city);
         }
+    }
+    //Render Jumbo displays results of response data
+    function aquireJumbo(data){
+        //Aquire response data
+        temp = (data.main.temp -273.15)*9/5+32+" °F."; //ferenheight conversion from Kelvin
+        humidity = data.main.humidity+" %";
+        wind_speed = data.wind.speed+" MPH";
+        latitude = data.coord.lat;
+        longitude = data.coord.lon;
+
+        // seperate request for UV index based on initial city lat and long
+        $.ajax({
+            url: "http://samples.openweathermap.org/data/2.5/uvi?",
+            method: "GET",
+            data: {
+                lat: latitude,
+                lon: longitude,
+                APPID : key,
+            }
+        }).then(function (response) {
+            uv_index = response.value;
+            // Now that we have all data we can render to DOM
+            renderJumbo();
+        });
+    }
+    function renderJumbo(){
+        //Set Span text of each cat to data
+        tempDSP.text(temp);
+        humidityDSP.text(humidity);
+        wind_speedDSP.text(wind_speed);
+        uv_indexDSP.text(uv_index); 
+        console.log(uv_index);
     }
     function requestAPI() {
         $.ajax({
@@ -74,8 +108,9 @@ $(document).ready(function () {
                 q: query,
                 APPID : key
             }
-        }).then(function (response) {
-            console.log(response);
+        }).then(function (data) {
+            aquireJumbo(data);
+            // renderCards(data);
         });
     }
     main();
