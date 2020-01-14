@@ -87,8 +87,8 @@ $(document).ready(function () {
         wind_speed = data.wind.speed+" MPH";
         var latitude = data.coord.lat;
         var longitude = data.coord.lon;
-        console.log(latitude);
-        console.log(longitude);
+        // console.log(latitude);
+        // console.log(longitude);
 
         // seperate request for UV index based on initial city lat and long
         $.ajax({
@@ -100,7 +100,7 @@ $(document).ready(function () {
                 lon: longitude,
             }
         }).then(function (response) {
-            console.log(response);
+            // console.log(response);
             uv_index = response.value;
             // Now that we have all data we can render to DOM
             renderJumbo();
