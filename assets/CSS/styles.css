@@ -1,10 +1,41 @@
 .main{
-    margin-left:3rem;
-    margin-right:3rem;
+    padding:2rem;
+    background: linear-gradient(to bottom right, #00ccff 0%, #3333cc 100%);
+}
+.col-4{
+    padding: 1rem;
+}
+/* search button color */
+#queryBTN{
+    background-color:orange;
+}
+.col-4 h3{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.col-8{
+    padding:1rem;
+}
+/* forcast heading */
+.active{
+    background-color: orange;
 }
 .jumbotron{
     padding-top:1rem;
     padding-bottom: 1rem;
     margin-top: .5rem;
+    margin-bottom: .5rem;
+    background-color: white;
+    border: gray 1px solid;
+    border-radius: .5rem;
+}
+#uv_index{
+    padding: 0.1rem;
+    border-radius: 5px;
+    border: gray solid 2px;
+    background-color: orange;
+}
+.col-8 h3{
+    margin-top:1rem;
     margin-bottom: .5rem;
 }

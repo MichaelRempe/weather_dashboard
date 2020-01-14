@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Custom CSS + CDN styles -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/CSS/styles.css" />
     <title>Simple Weather</title>
 
@@ -17,7 +16,7 @@
     <nav class="navbar navbar-dark bg-dark justify-content-end">
         <span class="navbar-brand mb-0 h1">Weather Dashborad API</span>
     </nav>
-    <div class="container main">
+    <div class="container-fluid main">
         <div class="row">
             <div class="col-4">
                 <!-- search area -->
@@ -29,7 +28,7 @@
                                 aria-describedby="button-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" id="queryBTN" type="button"
-                                    id="button-addon2"></button>
+                                    id="button-addon2">Search</button>
                             </div>
                         </div>
                     </div>
@@ -50,7 +49,7 @@
                         <div class="jumbotron">
                             <div class="jumbotron jumbotron-fluid">
                                 <div class="container">
-                                    <h1 class="display-4">City and Date</h1>
+                                    <h1 class="display-5"><span id="city"></span><br><span id="time"></span></h1>
                                     <hr class="my-4">
                                     <p>Temperature: <span id="currentTemp"></span></p>
                                     <p>Humidity: <span id="currentHumidity"></span></p>
@@ -61,60 +60,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row card-display">
-                    <!-- 5 day forcast cards -->
-                    <!-- C1 -->
-                    <div class="col-2">
-                        <div class="card"></div>
-                        <div class="card-header" id="Date_1"></div>
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Temp: </p>
-                            <p class="card-text">Humidity: </p>
-                        </div>
-                    </div>
-                    <!-- C2 -->
-                    <div class="col-2">
-                        <div class="card"></div>
-                        <div class="card-header" id="Date_1"></div>
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Temp: </p>
-                            <p class="card-text">Humidity: </p>
-                        </div>
-                    </div>
-                    <!-- C3 -->
-                    <div class="col-2">
-                        <div class="card"></div>
-                        <div class="card-header" id="Date_1"></div>
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Temp: </p>
-                            <p class="card-text">Humidity: </p>
-                        </div>
-                    </div>
-                    <!-- C4 -->
-                    <div class="col-2">
-                        <div class="card"></div>
-                        <div class="card-header" id="Date_1"></div>
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Temp: </p>
-                            <p class="card-text">Humidity: </p>
-                        </div>
-                    </div>
-                    <!-- C5 -->
-                    <div class="col-2">
-                        <div class="card"></div>
-                        <div class="card-header" id="Date_1"></div>
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Temp: </p>
-                            <p class="card-text">Humidity: </p>
-                        </div>
-                    </div>
+                <div class="row justify-content-center">
+                    <h3>5 Day Forcast:</h3>
                 </div>
-
+                <div class="row justify-content-center card-display">
+                    <!-- 5 day forcast cards -->
+                </div>
             </div>
         </div>
     </div>
@@ -122,8 +73,9 @@
     </div>
     <!-- CDN js libraries + custom scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js> </script> <script
-        src="assets/JavaScript/script.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js> </script>
+    <script src = https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js></script>
+    <script src="assets/JavaScript/script.js"></script>
 </body>
 
 </html>
