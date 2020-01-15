@@ -20,6 +20,21 @@
 .active{
     background-color: orange;
 }
+/* forcast cards */
+.card-display{
+    margin-left: .25rem;
+    margin-right:.25rem;
+}
+.card-col{
+    margin-left: 0;
+    margin-right:0;
+    padding-left: .1rem;
+    padding-right: .1rem;
+}
+.card{
+    padding-left: .1rem;
+    padding-right: .1rem;
+}
 .jumbotron{
     padding-top:1rem;
     padding-bottom: 1rem;
