@@ -27,8 +27,9 @@ $(document).ready(function () {
     var query = ""; //captured input;
     var queryURL = "http://api.openweathermap.org/data/2.5/weather"; //"...?q="+query
 
-    // Global Count of items in local storage
-    var count = 0;
+    // Global array of items in local storage initially set to empty
+    var localCities = ["London"];
+    localStorage.setItem("cities", localCities);
     // Search bar input field and button
     inputBTN.on("click", function () {
         captureInput();
@@ -76,11 +77,21 @@ $(document).ready(function () {
 
     }
     //Dynamic creation of group items of popular cities
-    //obtains list group and appends jquery list items with bootstrap attributes. Based on popCities array
+    //obtains list group and appends jquery list items with bootstrap attributes. Based on popCities array whcih is added to based on search quiries
     // predefined pop city arry
-    var popCities = ["Boston", "Washington", "New York City", "Tampa", "Huston", "Kansas City", "Las Vegas", "Seattle"];
+    
+    var popCities = ["Boston", "Washington", "New York City", "Tampa", "Houston", "Kansas City", "Las Vegas", "Seattle"];
     function renderPopCities() {
         var popCitiesLG = $(".list-group");
+        popCitiesLG.empty();
+        //add onto list based on local storage using same for loop logic for clearing pop cities div and re rendering list
+        var storage = localStorage.getItem("cities");
+        var pulledCities = storage.split(",");
+        for (var i = 0; i < pulledCities.length; i++) {
+            if (popCities.includes(pulledCities[i])===false) {
+                popCities.push(pulledCities[i]);
+            }
+        }
         for (var i = 0; i < popCities.length; i++) {
             //creat list item
             var city = $("<li>");
@@ -104,31 +115,6 @@ $(document).ready(function () {
             });
             popCitiesLG.append(city);
         }
-        //add onto list based on local storage using same for loop logic for clearing pop cities div and re rendering list
-        for (var i = 0; i < count; i++) {
-            if (popCities.includes(localStorage.getItem(i)) === false) {
-                //create list item
-                var city = $("<li>");
-                // add attributes and event listener
-                city.text(localStorage.getItem(i));
-                city.attr("value", localStorage.getItem(i));
-                city.attr("class", "list-group-item");
-                city.attr("type", "button");
-                city.removeClass("active");
-                city.on("click", function () {
-                    query = $(this).attr("value");  //set query to selected city
-                    popCitiesLG.empty(); //clear list and re-render with new active attribue set
-                    renderPopCities();
-                    var active = $(this).attr("value");
-                    $("li[value|='" + active + "']").attr("class", "list-group-item active");
-                    $("li[value|='" + active + "']").attr("style", "background-color: orange");
-
-                    $(this).attr("class", "list-group-item active");
-                    requestAPI();
-                });
-                popCitiesLG.append(city);
-            }
-        }
     }
     //Render Jumbo displays results of response data
     function aquireJumbo(data) {
@@ -138,13 +124,13 @@ $(document).ready(function () {
         temp = Math.round((data.main.temp - 273.15) * 9 / 5 + 32) + "°F."; //ferenheight conversion from Kelvin
         humidity = data.main.humidity + " %";
         wind_speed = data.wind.speed + " MPH";
-        main_icon = data.weather.icon;
+        main_icon = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
         var latitude = data.coord.lat;
         var longitude = data.coord.lon;
 
         // seperate request for UV index based on initial city lat and long
         $.ajax({
-            url: "http://api.openweathermap.org/data/2.5/uvi?",
+            url: "https://api.openweathermap.org/data/2.5/uvi?",
             method: "GET",
             data: {
                 APPID: key,
@@ -172,43 +158,44 @@ $(document).ready(function () {
     // renders blnak bootsrap cards (forcast_data will eventually be incorporated)
     function aquireCardData(forcast_data) {
         var count = 0;
-        for (var i = 0; i < cards.length; i++) { 
-                var card = cards[i]; // Access array sotring DOM Cards
-                card.empty();   //Clear current card of any Data
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i]; // Access array sotring DOM Cards
+            card.empty();   //Clear current card of any Data
 
-                // Update Data to current Card
-                var header = $("<div>");
-                header.attr("class", "card-header");
-                //create moment obj out of data time stamp for current card for formatting
-                var m = moment(forcast_data.list[count].dt_txt)
-                header.text(m.format("L"));
-
-                //Dan! could use help with image icons will ask you tomorrow (1/15/19)
-                var icon = $("<img>");
-                icon.attr("src", forcast_data.list[count].weather[0].icon);
-
-                // Temp and Humid data
-                var body = $("<div>");
-                body.attr("class", "card-body");
-                var card_temp = $("<p>");
-                card_temp.attr("class", "card-text");
-                //conversion from kelvin to ferenheight
-                card_temp.text("Temperature: "+Math.round((forcast_data.list[count].main.temp - 273.15) * 9 / 5 + 32) + "°F.")
-                var card_humid = $("<p>");
-                card_humid.attr("class", "card-text");
-                card_humid.text("Humidity: "+forcast_data.list[count].main.humidity);
+            // Update Data to current Card
+            var header = $("<div>");
+            header.attr("class", "card-header");
+            header.attr("styles", "wdith:100%");
+            //create moment obj out of data time stamp for current card for formatting
+            var m = moment(forcast_data.list[count].dt_txt);
+            header.text(m.format("LL"));
 
 
-                //attach card data to card
-                body.append(card_temp);
-                body.append(card_humid);
-                card.append(header);
-                card.append(icon);
-                card.append(body);
+            var icon = $("<img>");
+            icon.attr("src", "https://openweathermap.org/img/wn/" + forcast_data.list[count].weather[0].icon + "@2x.png");
 
-                cards[i].append(card);
+            // Temp and Humid data
+            var body = $("<div>");
+            body.attr("class", "card-body justify-content-left");
+            var card_temp = $("<p>");
+            card_temp.attr("class", "card-text");
+            //conversion from kelvin to ferenheight
+            card_temp.text("Temperature: " + Math.round((forcast_data.list[count].main.temp - 273.15) * 9 / 5 + 32) + "°F.")
+            var card_humid = $("<p>");
+            card_humid.attr("class", "card-text");
+            card_humid.text("Humidity: " + forcast_data.list[count].main.humidity+"%");
 
-                count+=8; //forcast data returns an array of 40 data sets, so incrementing by 8 gets us each new day at the same time and allows us to work with a multiple of 5 to say within the scope of current loop
+
+            //attach card data to card
+            body.append(card_temp);
+            body.append(card_humid);
+            card.append(header);
+            card.append(icon);
+            card.append(body);
+
+            cards[i].append(card);
+
+            count += 8; //forcast data returns an array of 40 data sets, so incrementing by 8 gets us each new day at the same time and allows us to work with a multiple of 5 to say within the scope of current loop
         }
 
     }
@@ -223,13 +210,18 @@ $(document).ready(function () {
         }).then(function (data) {
             aquireJumbo(data);
             requestForcastAPI();
-            localStorage.setItem(count, data.name);
-            count++;
+            if(popCities.includes(data.name)==false){
+                //if quried city is not already in popular city list, add it to local storage for later use
+                localCities.push(data.name);
+                localStorage.setItem("cities", localCities);
+                renderPopCities();
+            }
+            
         });
     }
     function requestForcastAPI() {
         $.ajax({
-            url: "http://api.openweathermap.org/data/2.5/forecast?",
+            url: "https://api.openweathermap.org/data/2.5/forecast?",
             method: "GET",
             data: {
                 q: query,
