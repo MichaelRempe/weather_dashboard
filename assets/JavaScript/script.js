@@ -25,7 +25,7 @@ $(document).ready(function () {
     // API global vals
     var key = "b452ea12ae8781f3b7e10bd1f1ed3249";
     var query = ""; //captured input;
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather"; //"...?q="+query
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather"; //"...?q="+query
 
     // Global array of items in local storage initially set to empty
     var localCities = ["London"];
@@ -124,13 +124,13 @@ $(document).ready(function () {
         temp = Math.round((data.main.temp - 273.15) * 9 / 5 + 32) + "°F."; //ferenheight conversion from Kelvin
         humidity = data.main.humidity + " %";
         wind_speed = data.wind.speed + " MPH";
-        main_icon = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
+        main_icon = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
         var latitude = data.coord.lat;
         var longitude = data.coord.lon;
 
         // seperate request for UV index based on initial city lat and long
         $.ajax({
-            url: "http://api.openweathermap.org/data/2.5/uvi?",
+            url: "https://api.openweathermap.org/data/2.5/uvi?",
             method: "GET",
             data: {
                 APPID: key,
@@ -172,7 +172,7 @@ $(document).ready(function () {
 
 
             var icon = $("<img>");
-            icon.attr("src", "http://openweathermap.org/img/wn/" + forcast_data.list[count].weather[0].icon + "@2x.png");
+            icon.attr("src", "https://openweathermap.org/img/wn/" + forcast_data.list[count].weather[0].icon + "@2x.png");
 
             // Temp and Humid data
             var body = $("<div>");
@@ -221,7 +221,7 @@ $(document).ready(function () {
     }
     function requestForcastAPI() {
         $.ajax({
-            url: "http://api.openweathermap.org/data/2.5/forecast?",
+            url: "https://api.openweathermap.org/data/2.5/forecast?",
             method: "GET",
             data: {
                 q: query,
