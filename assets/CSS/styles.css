@@ -16,6 +16,13 @@
 .col-8{
     padding:1rem;
 }
+
+img{
+    background-color: rgba(255,165,0,.7);
+    margin: 1rem;
+    width: 6rem;
+    height: 6rem;
+}
 /* forcast heading */
 .active{
     background-color: orange;
@@ -35,6 +42,9 @@
     padding-left: .1rem;
     padding-right: .1rem;
 }
+.card-header{
+    width:100%;
+}
 .jumbotron{
     padding-top:1rem;
     padding-bottom: 1rem;
@@ -43,6 +53,12 @@
     background-color: white;
     border: gray 1px solid;
     border-radius: .5rem;
+}
+#current-icon{
+    height:10rem;
+    width:10em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 #uv_index{
     padding: 0.1rem;
