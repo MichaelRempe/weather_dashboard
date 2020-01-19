@@ -25,7 +25,7 @@ $(document).ready(function () {
     // API global vals
     var key = "b452ea12ae8781f3b7e10bd1f1ed3249";
     var query = ""; //captured input;
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather"; //"...?q="+query
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather"; //"...?q="+query
 
     // Global array of items in local storage initially set to empty
     var localCities = ["London"];
